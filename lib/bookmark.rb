@@ -3,7 +3,12 @@ require 'pg'
 class Bookmark
 
   def self.all #look at last challenge from Battle, to check 'self'
-    con = PG.connect :dbname => 'bookmark_manager' #creates a connection to database
+    # setting the logic so if the ENV variable is test, it will connect to test database
+    if ENV['ENVIRONMENT'] == 'test'
+      con = PG.connect :dbname => 'bookmark_manager_test' 
+    else 
+      con = PG.connect :dbname => 'bookmark_manager' 
+    end
     runsql = con.exec "SELECT * FROM bookmarks" #runs SQL - telling it which table to look at
 #first way
     # runsql.each do |row|
