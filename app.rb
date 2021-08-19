@@ -13,11 +13,12 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/bookmark' do
-    Bookmark.create(params[:addurl])
+    Bookmark.data_entry(params[:addurl], params[:title])
     redirect '/bookmarks'
   end
 
   get '/bookmarks' do
+    @bookmarks = Bookmark.data_extraction
     erb :bookmarks
   end
 
