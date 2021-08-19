@@ -11,6 +11,10 @@ class Bookmark
     con.exec("INSERT INTO bookmarks(url) VALUES('#{url}');")
   end
 
+  def self.create(url)
+    Bookmark.new(url)
+  end
+
   def self.all #look at last challenge from Battle, to check 'self'
     # setting the logic so if the ENV variable is test, it will connect to test database
     if ENV['ENVIRONMENT'] == 'test'
